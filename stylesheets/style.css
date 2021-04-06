@@ -32,5 +32,5 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 #zero{
-    grid-area: 4 / 1 / span 1 / span 3;
+    grid-area: 4 / 1 / span 1 / span 2;
 }

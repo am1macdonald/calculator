@@ -1,4 +1,7 @@
 let numberArray = [];
+function workingNumber(){
+    return parseFloat(numberArray.join(''));
+};
 let accumulator = 0;
 let numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
@@ -17,8 +20,57 @@ numberButtons.forEach(button => {
             } else if (typeof parseInt(button.name) === 'number') {
                 numberArray.push(button.name);
             };
+            updateDisplay();
         console.log(button.name, numberArray);
-        document.getElementById('display').innerText = numberArray.join('');
         } else return;
     });
 });
+let operationButtons = document.querySelectorAll(".function");
+
+operationButtons.forEach(operation => {
+    operation.addEventListener('click', (event) => {
+        switch (operation.id) {
+            case 'clear':
+                clearArray();
+                break;
+            case 'clear-all':
+                clearArray();
+                accumulator = 0;
+                break;
+            case 'inverse':
+                break;
+            case 'square':
+                break;
+            case 'square-root':
+                break;
+            case 'multiply':
+                console.log('multiply');
+                if (workingNumber() > 0){
+                    accumulator = workingNumber();
+                    return accumulator;
+                };
+                break;
+            case 'divide':
+                break;
+            case 'plus':
+                accumulator = workingNumber();
+                break;
+            case 'minus':
+                break;
+            case 'equals':
+                accumulator === 0 ? document.getElementById('display').innerText = numberArray.join('') : document.getElementById('display').innerText = accumulator;
+        };
+    });
+});
+function clearArray() {
+   numberArray = [];
+    document.getElementById('display').innerText = 0;
+};
+function updateDisplay() {
+    document.getElementById('display').innerText = numberArray.join('');
+};
+
+function operate(num1, num2, func){
+    //accumulator some math parseFloat(operation numberArray.join(''));
+
+};

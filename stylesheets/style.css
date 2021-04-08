@@ -16,11 +16,11 @@
     background-color: #110C13;
 }
 #display{
-    margin: 1rem;
-    letter-spacing: 0.3rem;
+    margin: 0.15em;
+    letter-spacing: 0.08em;
     text-align: right;
     color: #fd84dbd3;
-    font-size: 10vw;
+    font-size: 18vmin;
     font-family: 'lcd_att_phone_timedateregular';
 }
 #buttons{
@@ -31,6 +31,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+#numbers button{
+    font-size: 11vmin;
+    border-radius: 0.3em;
+}
 #zero{
     grid-area: 4 / 1 / span 1 / span 2;
+}
+#functions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#functions button{
+    font-size: 10vmin;
+    border-radius: 1em;
 }

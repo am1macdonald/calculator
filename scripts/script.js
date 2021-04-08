@@ -1,26 +1,24 @@
-let numArr = [];
-let numberButton = document.querySelectorAll(".number");
-numberButton.forEach(button => {
+let numberArray = [];
+let accumulator = 0;
+let numberButtons = document.querySelectorAll(".number");
+numberButtons.forEach(button => {
     button.addEventListener('click', (event) => {
-        if (numArr.length < 12) {
+        if (numberArray.length < 12) {
             if (button.name === '.') {
-                if (numArr.includes('.')){
+                if (numberArray.includes('.')){
                     return;
-                } else if (numArr.length === 0) {
-                    numArr.push('0', '.');
+                } else if (numberArray.length === 0) {
+                    numberArray.push('0', '.');
                 } else {
-                    numArr.push('.');
+                    numberArray.push('.');
                 };
-            } else if (button.name === '0' && numArr.length === 0){
+            } else if (button.name === '0' && numberArray.length === 0){
                 return;
             } else if (typeof parseInt(button.name) === 'number') {
-                numArr.push(button.name);
+                numberArray.push(button.name);
             };
-        console.log(button.name, numArr);
-        document.getElementById('display').innerText = numArr.join('');
+        console.log(button.name, numberArray);
+        document.getElementById('display').innerText = numberArray.join('');
         } else return;
     });
 });
-
-
-numInput();

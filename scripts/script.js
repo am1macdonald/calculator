@@ -1,4 +1,5 @@
 let numberArray = [];
+let storageArray= [];
 function workingNumber(){
     return parseFloat(numberArray.join(''));
 };
@@ -53,7 +54,7 @@ operationButtons.forEach(operation => {
             case 'divide':
                 break;
             case 'plus':
-                accumulator = workingNumber();
+                accumulator = added(workingNumber());
                 break;
             case 'minus':
                 break;
@@ -62,6 +63,7 @@ operationButtons.forEach(operation => {
         };
     });
 });
+
 function clearArray() {
    numberArray = [];
     document.getElementById('display').innerText = 0;
@@ -71,6 +73,5 @@ function updateDisplay() {
 };
 
 function operate(num1, num2, func){
-    //accumulator some math parseFloat(operation numberArray.join(''));
 
 };

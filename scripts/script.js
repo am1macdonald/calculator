@@ -3,7 +3,6 @@ let storageArray= [];
 let display = document.getElementById('display');
 function workingNumber(){
     return parseFloat(numberArray.join(''));
-
 };
 let accumulator = 0;
 let numberButtons = document.querySelectorAll(".number");
@@ -31,24 +30,27 @@ numberButtons.forEach(button => {
 let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
-    operation.addEventListener('click', (event) => {       
-        if (storageArray.length === 3 || operation.name === '=') {
-            let operateArr = storageArray.splice(0,2);
-            console.log(operateArr);
+    operation.addEventListener('click', (event) => {
+
+
+    if (operation.id != 'equals' || !storageArray.length != 1) {
+        appendToArray();
+    };
+
+    if (storageArray.length >= 3 && /[+\-/*=]/.test(operation.name)) {
+            let operateArr = storageArray.splice(0,3);
+            console.log("operateArr: ", operateArr);
             operate(operateArr[0], operateArr[2], operateArr[1]);
         }
-        else if(numberArray.length > 0){
+        else if(numberArray.length > 0 || storageArray.length > 0){
             switch (operation.id) {
-                case 'clear':
-                    clearArray();
+                case 'plus':
+                    appendToArray(operation.id);
                     break;
-                case 'clear-all':
-                    clearArray();
-                    storageArray = [];
-                    accumulator = 0;
+                case 'minus':
+                    appendToArray(operation.id);
                     break;
                 case 'square':
-                    console.log(workingNumber());
                     let squared = workingNumber() * workingNumber();
                     numberArray = squared.toString().split('');
                     display.innerText = squared.toString();
@@ -58,7 +60,13 @@ operationButtons.forEach(operation => {
                         numberArray = rooted.toString().split('');
                         display.innerText = rooted.toString();
                     break;
-
+                case 'clear':
+                    clearArray();
+                    break;
+                case 'clear-all':
+                    clearArray();
+                    storageArray = [];
+                    accumulator = 0;
             };
         };
         console.log('numberArray: ', numberArray, 'storageArray: ', storageArray);
@@ -75,19 +83,23 @@ function clearArray() {
     display.innerText = 0;
 };
 function updateDisplay() {
-    display.innerText = numberArray.join('');
+    display.innerText = workingNumber();
 };
 function addEmUp(a, b) {
-    return a + b;
+    numberArray =  [a + b];
+    updateDisplay();
 };
 function subtractEm(a, b) {
-    return a - b;
+    numberArray =  [a - b];
+    updateDisplay();
 };
 function multiplyEm(a, b) {
-    return a * b;
+    numberArray =  [a * b];
+    updateDisplay();
 };
 function divideAndConquer(a, b) {
-    return a / b;
+    numberArray =  [a / b];
+    updateDisplay();
 };
 function operate(a ,b, operator) {
     switch (operator) {
@@ -105,10 +117,3 @@ function operate(a ,b, operator) {
         break;
     };
 };
-
-
-/*Switch candy for later...
-switch (operation.id) {
-    
-};
-});*/

@@ -1,5 +1,6 @@
 let numberArray = [];
 let storageArray= [];
+let display = document.getElementById('display');
 function workingNumber(){
     return parseFloat(numberArray.join(''));
 };
@@ -36,6 +37,7 @@ operationButtons.forEach(operation => {
                 break;
             case 'clear-all':
                 clearArray();
+                storageArray = [];
                 accumulator = 0;
                 break;
             case 'inverse':
@@ -45,33 +47,32 @@ operationButtons.forEach(operation => {
             case 'square-root':
                 break;
             case 'multiply':
-                console.log('multiply');
-                if (workingNumber() > 0){
-                    accumulator = workingNumber();
-                    return accumulator;
-                };
+                appendToArray('*');
                 break;
             case 'divide':
+                appendToArray('/');
                 break;
             case 'plus':
-                accumulator = added(workingNumber());
+                appendToArray('+');
                 break;
             case 'minus':
-                storageArray.push(workingNumber(), '-');
+                appendToArray('-');
                 break;
             case 'equals':
-                accumulator === 0 ? document.getElementById('display').innerText = numberArray.join('') : document.getElementById('display').innerText = accumulator;
+                break;
         };
     });
 });
 function appendToArray(sign) {
-    storageArray.push(workingNumber(), sign);
-    clearArray();
+    if (true) {
+        storageArray.push(workingNumber(), sign);
+        clearArray();
+    }
 };
 function clearArray() {
-   numberArray = [];
-    document.getElementById('display').innerText = 0;
+    numberArray = [];
+    display.innerText = 0;
 };
 function updateDisplay() {
-    document.getElementById('display').innerText = numberArray.join('');
+    display.innerText = numberArray.join('');
 };

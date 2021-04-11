@@ -46,3 +46,6 @@
     font-size: 9vmin;
     border-radius: 1em;
 }
+#equals{
+    grid-area: 5 / 1 / span 1 / span 2;
+}

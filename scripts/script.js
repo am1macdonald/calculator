@@ -3,6 +3,7 @@ let storageArray= [];
 let display = document.getElementById('display');
 function workingNumber(){
     return parseFloat(numberArray.join(''));
+
 };
 let accumulator = 0;
 let numberButtons = document.querySelectorAll(".number");
@@ -30,25 +31,44 @@ numberButtons.forEach(button => {
 let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
-    operation.addEventListener('click', (event) => {
-        if (operation.name === '='){
-            appendToArray();
-            console.log(storageArray, '=');
-        } else if (numberArray.length > 0) {
-            appendToArray(operation.name);
-            console.log(storageArray);
+    operation.addEventListener('click', (event) => {       
+        if (storageArray.length === 3 || operation.name === '=') {
+            let operateArr = storageArray.splice(0,2);
+            console.log(operateArr);
+            operate(operateArr[0], operateArr[2], operateArr[1]);
+        }
+        else if(numberArray.length > 0){
+            switch (operation.id) {
+                case 'clear':
+                    clearArray();
+                    break;
+                case 'clear-all':
+                    clearArray();
+                    storageArray = [];
+                    accumulator = 0;
+                    break;
+                case 'square':
+                    console.log(workingNumber());
+                    let squared = workingNumber() * workingNumber();
+                    numberArray = squared.toString().split('');
+                    display.innerText = squared.toString();
+                    break;
+                case 'square-root':
+                    let rooted = Math.sqrt(workingNumber());
+                        numberArray = rooted.toString().split('');
+                        display.innerText = rooted.toString();
+                    break;
+
+            };
         };
+        console.log('numberArray: ', numberArray, 'storageArray: ', storageArray);
     });
         
 });
 function appendToArray(sign) {
-    storageArray.push(workingNumber());
+    numberArray.length > 0 ? storageArray.push(workingNumber()) : false;
     clearArray();
-    if (!sign) {
-        storageArray.push(sign);       
-    };
-    
-    
+    sign ? storageArray.push(sign) : false;
 };
 function clearArray() {
     numberArray = [];
@@ -83,29 +103,12 @@ function operate(a ,b, operator) {
     case 'minus':
         subtractEm(a, b);
         break;
-
-    }
+    };
 };
 
 
 /*Switch candy for later...
 switch (operation.id) {
-    case 'clear':
-        clearArray();
-        break;
-    case 'clear-all':
-        clearArray();
-        storageArray = [];
-        accumulator = 0;
-        break;
-    case 'inverse':
-        break;
-    case 'square':
-        break;
-    case 'square-root':
-        break;
     
-    case 'equals':
-        break;
 };
 });*/

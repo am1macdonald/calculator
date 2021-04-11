@@ -31,13 +31,24 @@ let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', (event) => {
+        if (operation.name === '='){
+            appendToArray();
+            console.log(storageArray, '=');
+        } else if (numberArray.length > 0) {
+            appendToArray(operation.name);
+            console.log(storageArray);
+        };
+    });
         
 });
 function appendToArray(sign) {
-    if (true) {
-        storageArray.push(workingNumber(), sign);
-        clearArray();
-    }
+    storageArray.push(workingNumber());
+    clearArray();
+    if (!sign) {
+        storageArray.push(sign);       
+    };
+    
+    
 };
 function clearArray() {
     numberArray = [];
@@ -45,6 +56,35 @@ function clearArray() {
 };
 function updateDisplay() {
     display.innerText = numberArray.join('');
+};
+function addEmUp(a, b) {
+    return a + b;
+};
+function subtractEm(a, b) {
+    return a - b;
+};
+function multiplyEm(a, b) {
+    return a * b;
+};
+function divideAndConquer(a, b) {
+    return a / b;
+};
+function operate(a ,b, operator) {
+    switch (operator) {
+        case 'multiply':
+            multiplyEm(a, b);
+        break;
+    case 'divide':
+            divideAndConquer(a, b);
+        break;
+    case 'plus':
+        addEmUp(a, b);
+        break;
+    case 'minus':
+        subtractEm(a, b);
+        break;
+
+    }
 };
 
 
@@ -64,18 +104,7 @@ switch (operation.id) {
         break;
     case 'square-root':
         break;
-    case 'multiply':
-        appendToArray('*');
-        break;
-    case 'divide':
-        appendToArray('/');
-        break;
-    case 'plus':
-        appendToArray('+');
-        break;
-    case 'minus':
-        appendToArray('-');
-        break;
+    
     case 'equals':
         break;
 };

@@ -57,21 +57,21 @@ operationButtons.forEach(operation => {
                 accumulator = added(workingNumber());
                 break;
             case 'minus':
+                storageArray.push(workingNumber(), '-');
                 break;
             case 'equals':
                 accumulator === 0 ? document.getElementById('display').innerText = numberArray.join('') : document.getElementById('display').innerText = accumulator;
         };
     });
 });
-
+function appendToArray(sign) {
+    storageArray.push(workingNumber(), sign);
+    clearArray();
+};
 function clearArray() {
    numberArray = [];
     document.getElementById('display').innerText = 0;
 };
 function updateDisplay() {
     document.getElementById('display').innerText = numberArray.join('');
-};
-
-function operate(num1, num2, func){
-
 };

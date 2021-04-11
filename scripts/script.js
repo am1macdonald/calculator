@@ -31,37 +31,7 @@ let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', (event) => {
-        switch (operation.id) {
-            case 'clear':
-                clearArray();
-                break;
-            case 'clear-all':
-                clearArray();
-                storageArray = [];
-                accumulator = 0;
-                break;
-            case 'inverse':
-                break;
-            case 'square':
-                break;
-            case 'square-root':
-                break;
-            case 'multiply':
-                appendToArray('*');
-                break;
-            case 'divide':
-                appendToArray('/');
-                break;
-            case 'plus':
-                appendToArray('+');
-                break;
-            case 'minus':
-                appendToArray('-');
-                break;
-            case 'equals':
-                break;
-        };
-    });
+        
 });
 function appendToArray(sign) {
     if (true) {
@@ -76,3 +46,37 @@ function clearArray() {
 function updateDisplay() {
     display.innerText = numberArray.join('');
 };
+
+
+/*Switch candy for later...
+switch (operation.id) {
+    case 'clear':
+        clearArray();
+        break;
+    case 'clear-all':
+        clearArray();
+        storageArray = [];
+        accumulator = 0;
+        break;
+    case 'inverse':
+        break;
+    case 'square':
+        break;
+    case 'square-root':
+        break;
+    case 'multiply':
+        appendToArray('*');
+        break;
+    case 'divide':
+        appendToArray('/');
+        break;
+    case 'plus':
+        appendToArray('+');
+        break;
+    case 'minus':
+        appendToArray('-');
+        break;
+    case 'equals':
+        break;
+};
+});*/

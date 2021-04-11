@@ -31,12 +31,9 @@ let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', (event) => {
-
-
     if (operation.id != 'equals' || !storageArray.length != 1) {
         appendToArray();
     };
-
     if (storageArray.length >= 3 && /[+\-/*=]/.test(operation.name)) {
             let operateArr = storageArray.splice(0,3);
             console.log("operateArr: ", operateArr);
@@ -48,6 +45,12 @@ operationButtons.forEach(operation => {
                     appendToArray(operation.id);
                     break;
                 case 'minus':
+                    appendToArray(operation.id);
+                    break;
+                case 'multiply':
+                    appendToArray(operation.id);
+                    break;
+                case 'divide':
                     appendToArray(operation.id);
                     break;
                 case 'square':

@@ -39,15 +39,46 @@ operationButtons.forEach(operation => {
         };
         if (storageArray.length === 1) {
             storageArray.push(operation.id);
-        } else if (storageArray === 3) {
+        } else if (storageArray.length === 3) {
             operate(storageArray[0],storageArray[2],storageArray[1]);
+            storageArray.push(operation.id);
         };
-
-
-
         console.log('numberArray: ', numberArray, 'storageArray: ', storageArray);
     });
 });
+let modifyButtons = document.querySelectorAll('.modify');
+modifyButtons.forEach(button => {
+    button.addEventListener('click', event => {
+        switch (button.id) {
+            case 'clear':
+                clearArray();
+                break;
+            case 'clear-all':
+                clearArray();
+                storageArray = [];
+                break;
+            case 'square':
+                break;
+            case 'square-root':
+                break;
+            case 'equals':
+                equals();
+                break;
+        };
+
+    });
+});
+function equals(){
+    if (storageArray.length === 0){
+        storageArray.push(workingNumber());
+        updateDisplay(storageArray[0]);
+    } else if (storageArray.length === 2){
+        storageArray.push(workingNumber());
+        clearArray();
+        operate(storageArray[0], storageArray[2], storageArray[1]);
+    };
+
+}
 function clearArray() {
     numberArray = [];
     display.innerText = 0;
@@ -56,6 +87,7 @@ function updateDisplay(num) {
     display.innerText = num;
 };
 function addEmUp(a, b) {
+    console.log("addemup: ", a+b)
     storageArray = [a + b];
     updateDisplay(storageArray[0]);
 };

@@ -71,15 +71,17 @@ modifyButtons.forEach(button => {
 function equals(){
     if (storageArray.length === 0){
         storageArray.push(workingNumber());
+        clearArray();
         updateDisplay(storageArray[0]);
+        
     } else if (storageArray.length === 2){
         storageArray.push(workingNumber());
         clearArray();
         operate(storageArray[0], storageArray[2], storageArray[1]);
     };
-
-}
+};
 function clearArray() {
+    numberArray.length === 0 ? storageArray = [] : false;
     numberArray = [];
     display.innerText = 0;
 };

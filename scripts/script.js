@@ -31,6 +31,7 @@ let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', (event) => {
+        numberButtons.forEach(button => button.disabled = true);
         if (numberArray.length > 0) {
             storageArray.push(workingNumber());
             clearArray();
@@ -58,8 +59,10 @@ modifyButtons.forEach(button => {
                 storageArray = [];
                 break;
             case 'square':
+                numberButtons.forEach(button => button.disabled = true);
                 break;
             case 'square-root':
+                numberButtons.forEach(button => button.disabled = true);
                 break;
             case 'equals':
                 equals();
@@ -81,6 +84,7 @@ function equals(){
     };
 };
 function clearArray() {
+    numberButtons.forEach(button => button.disabled = false);
     numberArray.length === 0 ? storageArray = [] : false;
     numberArray = [];
     display.innerText = 0;

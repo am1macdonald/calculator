@@ -22,7 +22,7 @@ numberButtons.forEach(button => {
             } else if (typeof parseInt(button.name) === 'number') {
                 numberArray.push(button.name);
             };
-            updateDisplay();
+            updateDisplay(workingNumber());
         console.log(button.name, numberArray);
         } else return;
     });
@@ -31,6 +31,65 @@ let operationButtons = document.querySelectorAll(".function");
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', (event) => {
+        if (numberArray.length > 0) {
+            storageArray.push(workingNumber());
+            clearArray();
+        } else if (storageArray.length === 0) {
+            storageArray.push(0);
+        };
+        if (storageArray.length === 1) {
+            storageArray.push(operation.id);
+        } else if (storageArray === 3) {
+            operate(storageArray[0],storageArray[2],storageArray[1]);
+        };
+
+
+
+        console.log('numberArray: ', numberArray, 'storageArray: ', storageArray);
+    });
+});
+function clearArray() {
+    numberArray = [];
+    display.innerText = 0;
+};
+function updateDisplay(num) {
+    display.innerText = num;
+};
+function addEmUp(a, b) {
+    storageArray = [a + b];
+    updateDisplay(storageArray[0]);
+};
+function subtractEm(a, b) {
+    storageArray = [a - b];
+    updateDisplay(storageArray[0]);
+};
+function multiplyEm(a, b) {
+    storageArray = [a * b];
+    updateDisplay(storageArray[0]);
+};
+function divideAndConquer(a, b) {
+    storageArray = [a / b];
+    updateDisplay(storageArray[0]);
+};
+function operate(a ,b, operator) {
+    switch (operator) {
+        case 'multiply':
+            multiplyEm(a, b);
+        break;
+    case 'divide':
+            divideAndConquer(a, b);
+        break;
+    case 'plus':
+        addEmUp(a, b);
+        break;
+    case 'minus':
+        subtractEm(a, b);
+        break;
+    };
+};
+
+/*
+
     if (operation.id != 'equals' || !storageArray.length != 1) {
         appendToArray();
     };
@@ -74,49 +133,5 @@ operationButtons.forEach(operation => {
         };
         console.log('numberArray: ', numberArray, 'storageArray: ', storageArray);
     });
-        
-});
-function appendToArray(sign) {
-    numberArray.length > 0 ? storageArray.push(workingNumber()) : false;
-    clearArray();
-    sign ? storageArray.push(sign) : false;
-};
-function clearArray() {
-    numberArray = [];
-    display.innerText = 0;
-};
-function updateDisplay() {
-    display.innerText = workingNumber();
-};
-function addEmUp(a, b) {
-    numberArray =  [a + b];
-    updateDisplay();
-};
-function subtractEm(a, b) {
-    numberArray =  [a - b];
-    updateDisplay();
-};
-function multiplyEm(a, b) {
-    numberArray =  [a * b];
-    updateDisplay();
-};
-function divideAndConquer(a, b) {
-    numberArray =  [a / b];
-    updateDisplay();
-};
-function operate(a ,b, operator) {
-    switch (operator) {
-        case 'multiply':
-            multiplyEm(a, b);
-        break;
-    case 'divide':
-            divideAndConquer(a, b);
-        break;
-    case 'plus':
-        addEmUp(a, b);
-        break;
-    case 'minus':
-        subtractEm(a, b);
-        break;
-    };
-};
+
+*/

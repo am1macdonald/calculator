@@ -13,6 +13,15 @@
     font-style: normal;
 }
 /* CSS */
+#background{
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+}
+#calculator-body{
+    padding: 1rem;
+    background-color: silver;
+}
 #normal{
     display: flex;
     flex-direction: column;
@@ -26,7 +35,7 @@
     letter-spacing: 0.08em;
     text-align: right;
     color: #fd84dbd3;
-    font-size: 18vmin;
+    font-size: 15vmin;
     font-family: 'lcd_att_phone_timedateregular';
 }
 #buttons{
@@ -49,7 +58,7 @@
     grid-template-columns: 1fr 1fr;
 }
 #functions button{
-    font-size: 9vmin;
+    font-size: 6vmin;
     border-radius: 1em;
 }
 #equals{

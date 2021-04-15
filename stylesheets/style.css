@@ -5,7 +5,8 @@
          url('../assets/LCD/lcdattphonetimedate-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}@font-face {
+}
+@font-face {
     font-family: 'press_start_2pregular';
     src: url('../assets/buttonFont/pressstart2p-regular-webfont.woff2') format('woff2'),
          url('../assets/buttonFont/pressstart2p-regular-webfont.woff') format('woff');
@@ -20,15 +21,66 @@
 }
 #calculator-body{
     padding: 1rem;
-    background-color: silver;
+    background: rgb(210,216,214);
+    background: linear-gradient(137deg, rgba(210,216,214,1) 0%, rgba(229,232,232,1) 72%, rgba(249,249,249,1) 100%); 
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 80%;
+    height: auto;
+    border-radius: 1rem;
+
 }
 #normal{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+#calculator-top{
+
+    inset: 1rem 1rem 1rem 1rem rgba(0,0,0,1);
+
+    width: 96%;
+    height: auto;
+    
+    padding: 2%;
+    border-radius: 0.6rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgb(242,70,70);
+    background: linear-gradient(90deg, rgba(242,70,70,1) 0%, rgba(198,84,113,1) 48%, rgba(70,70,242,1) 100%); 
+
+}
+#logo{
+    color: #F0E100;
+    font-size: 6vmin;
+    font-family: press_start_2pregular;
+   }
+#solar{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    border-radius: 0.6rem;
+    overflow: hidden;
+
+    width: 13rem;
+    height: 3em;
+}
+.solar-panel{
+    background-color: black;
+    border-color: rgba(53, 53, 53, 0.377);
+    border-width: 0.1rem;
+    border-style: solid;
+}
+
 #display-frame{
     background-color: #110C13;
+    border-radius: 0.3rem;
 }
 #display{
     margin: 0.15em;
@@ -45,10 +97,21 @@
 #numbers{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    margin-right: 1rem;
 }
 #numbers button{
-    font-size: 11vmin;
+    text-align: center;
+
+    background: rgb(251,255,15);
+    background: radial-gradient(circle, rgba(251,255,15,1) 0%, rgba(255,255,61,1) 78%, rgba(249,249,249,1) 100%); 
+    
+    border-color: rgba(210,197,30,1);
+
+    font-family: press_start_2pregular;
+    margin: 0.1rem;
+    font-size: 8vmin;
     border-radius: 0.3em;
+    padding: 0.4rem;
 }
 #zero{
     grid-area: 4 / 1 / span 1 / span 2;
@@ -58,9 +121,16 @@
     grid-template-columns: 1fr 1fr;
 }
 #functions button{
-    font-size: 6vmin;
-    border-radius: 1em;
-}
+    
+    font-family: press_start_2pregular;
+    font-size: 5vmin;
+    border-radius: 0.4em;
+    margin: 0.08rem;
+
+    background: rgb(25,134,164);
+    background: radial-gradient(circle, rgba(25,134,164,1) 0%, rgba(69,193,227,1) 63%, rgba(132,227,255,1) 100%); }
 #equals{
     grid-area: 5 / 1 / span 1 / span 2;
+
+    font-size: 50px ;
 }

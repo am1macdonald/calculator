@@ -7,11 +7,20 @@
         <title>Calculator</title>
         <link rel="stylesheet" href="stylesheets/reset.css"/>
         <link rel="stylesheet" href="stylesheets/style.css"/>
-    </head>
-    
+    </head>    
     <body>
         <main id="background">
-            <div id="calculator-body">                    
+            <div id="calculator-body">  
+                <div id="calculator-top">
+                    <div id="logo">Mathifier</div>
+                    <div id="solar">
+                        <div class="solar-panel"></div>
+                        <div class="solar-panel"></div>
+                        <div class="solar-panel"></div>
+                        <div class="solar-panel"></div>
+                        <div class="solar-panel"></div>
+                    </div>  
+                </div>             
             <div id="display-frame">
                 <div id="display">0</div>
             </div>                    
@@ -30,14 +39,14 @@
                     <button class="number" id="decimal" name=".">.</button>
                 </div>
                 <div id="functions">
-                    <button class="modify" id="clear" name="C">C</button>
-                    <button class="modify" id="clear-all" name="CE">CE</button>
-                    <button class="modify" id="square" name="square">^2</button>
-                    <button class="modify" id="square-root" name="Math.sqrt()">sqrt</button>
-                    <button class="function" id="multiply" name="*">x</button>
-                    <button class="function" id="divide" name="/">%</button>
-                    <button class="function" id="plus" name="+">+</button>
-                    <button class="function" id="minus" name="-">-</button>
+                    <button class="modify func-row1" id="clear" name="C">C</button>
+                    <button class="modify func-row1" id="clear-all" name="CE">CE</button>
+                    <button class="modify func-row2" id="square" name="square">^2</button>
+                    <button class="modify func-row2" id="square-root" name="Math.sqrt()">sqrt</button>
+                    <button class="function func-row3" id="multiply" name="*">x</button>
+                    <button class="function func-row3" id="divide" name="/">%</button>
+                    <button class="function func-row4" id="plus" name="+">+</button>
+                    <button class="function func-row4" id="minus" name="-">-</button>
                     <button class="modify" id="equals" name="=">=</button>
                 </div>
             </div>                    

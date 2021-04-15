@@ -8,7 +8,7 @@ let accumulator = 0;
 let numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
     button.addEventListener('click', (event) => {
-        if (numberArray.length < 12) {
+        if (numberArray.length < 10) {
             if (button.name === '.') {
                 if (numberArray.includes('.')){
                     return;

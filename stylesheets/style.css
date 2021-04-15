@@ -13,6 +13,22 @@
     font-weight: normal;
     font-style: normal;
 }
+/*Colour Palette */
+/* CSS HEX
+--eminence: #711c91ff;
+--malachite: #0de71cff;
+--steel-pink: #cc00beff;
+--maximum-blue-green: #0abdc6ff;
+--dark-cornflower-blue: #133e7cff;
+
+ CSS HSL
+--eminence: hsla(284, 68%, 34%, 1);
+--malachite: hsla(124, 89%, 48%, 1);
+--steel-pink: hsla(304, 100%, 40%, 1);
+--maximum-blue-green: hsla(183, 90%, 41%, 1);
+--dark-cornflower-blue: hsla(215, 73%, 28%, 1);
+*/
+
 /* CSS */
 #background{
     background-color: black;

@@ -95,7 +95,15 @@ function clearArray() {
     display.innerText = 0;
 };
 function updateDisplay(num) {
+
     display.innerText = num;
+    if(num.length <= 10) {
+        display.innerText = num;
+    } else {
+        let digits = /\d+\./
+        let exponential = num.length;
+        let i = 0;
+    };
 };
 function addEmUp(a, b) {
     console.log("addemup: ", a+b)

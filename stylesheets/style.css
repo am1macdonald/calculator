@@ -32,39 +32,42 @@
 /* CSS */
 #background{
     background-color: rgb(248, 231, 231);
+    background-size: cover;
+    position: relative;
     width: 100vw;
     height: 100vh;
 }
 #calculator-body{
     padding: 1rem;
-    background: rgb(210,216,214);
-    background: linear-gradient(137deg, rgba(210,216,214,1) 0%, rgba(229,232,232,1) 72%, rgba(249,249,249,1) 100%); 
-    position: relative;
+    background: rgb(208,208,208);
+    background: linear-gradient(0deg, rgba(208,208,208,1) 0%, rgba(214,214,214,1) 83%, rgba(153,156,155,1) 83.5%,
+     rgba(140,140,140,1) 83%, rgba(201,201,201,1) 85%, rgba(245,245,245,1) 86%); 
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 80%;
+    max-width: 100%;
     height: auto;
     border-radius: 1rem;
     box-shadow: -.4rem -1.2rem 1.8em .3rem  rgba(132, 133, 132, 0.493),
     -0.1rem -0.1rem .5rem .1rem  rgba(132, 133, 132, .9),
     inset .2rem .2rem 1rem .2rem  rgba(129, 134, 133, 0.5);
-}
-#normal{
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
 }
 #calculator-top{
 
     box-shadow: inset -0.05rem -0.05rem .2rem .008rem rgba(0,0,0,1);
 
-    width: 96%;
+    max-width: 96%;
+    margin-bottom: 1rem;
     height: auto;
     
     padding: 2%;
-    border-radius: 0.6rem;
+    border-radius: 0.4rem;
 
     display: flex;
     justify-content: space-between;
@@ -89,8 +92,9 @@
     overflow: hidden;
     box-shadow: inset -0.05rem -0.05rem .2rem .008rem rgba(0,0,0,1);
     width: 13rem;
+    max-width: 30%;
     height: 3rem;
-    max-height: 50px;
+    max-height: 80%;
 }
 .solar-panel{
     background-color: rgb(36, 35, 35);
@@ -102,18 +106,29 @@
 }
 
 #display-frame{
-    background-color: #ffffffb9;
+
+
+    margin-top: .2rem;
+
+    z-index: 2;
+    
+    background: rgb(255,255,255);
+    background: linear-gradient(162deg, rgba(255,255,255,1) 2%, rgba(199,226,252,1) 9%, rgba(255,255,255,1) 15%, rgba(195,229,244,1) 19%, rgba(255,255,255,1) 22%, rgba(200,232,245,1) 26%, rgba(255,255,255,1) 32%); 
     border-radius: 0.6rem;
     filter: blur(0.031rem);
     overflow: hidden;
     margin: 1rem .2rem;
 
+    width: 98%;
+    max-height: 70%;
+    justify-self: center;
+
     box-shadow: inset -0.15rem -0.05rem .2rem .008rem rgba(0,0,0,1);
 }
 #display{
-    margin: .1rem .1rem;
+    z-index: 1;
     width: auto;
-    height: auto;
+    height: 100%;
     background-color: black;
     letter-spacing: 0.05em;
     text-align: right;
@@ -124,29 +139,60 @@
 }
 #buttons{
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-gap: 2rem;
+    grid-template-columns: 4fr 2fr;
+    max-width: 95%;
+    justify-self: center;
+    margin: 1rem 0;
+
 }
 #numbers{
     display: grid;
+    grid-gap: .3rem;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-right: 1rem;
+    margin-right: 0.3rem;
 }
 #numbers button{
     text-align: center;
 
-    background: rgb(251,255,15);
-    background: radial-gradient(circle, rgba(251,255,15,1) 0%, rgba(255,255,61,1) 78%, rgba(249,249,249,1) 100%); 
-    
+    background-color: rgb(251,255,15);
+    background-image: radial-gradient(circle, rgb(230, 233, 56) 10% 45%, rgb(190, 192, 92) 90%, rgb(250, 250, 175) 1%),
+    radial-gradient(circle, rgb(230, 233, 56) 10% 45%, rgb(190, 192, 92) 90%, rgb(250, 250, 175) 1%),
+    radial-gradient(circle, rgb(230, 233, 56) 10% 45%, rgb(190, 192, 92) 90%, rgb(250, 250, 175) 1%),
+    radial-gradient(circle, rgb(230, 233, 56) 10% 90%, rgb(190, 192, 92) 90%, rgb(250, 250, 175) 1%);
+    background-size: .8rem 150%, .8rem 150%;
+    background-position: calc(100% + .05rem) 50%, -.25rem 50%, 50% .25rem;
+    background-repeat: no-repeat;
+
+
     border-color: rgba(210,197,30,1);
 
-    font-family: press_start_2pregular;
+    box-shadow: -.25rem -0.8rem 1.8em .15rem  rgba(132, 133, 132, 0.493),
+    0rem 0rem .15rem .15rem  rgb(0, 0, 0);
+
+    font-family: 'Roboto', sans-serif;
     margin: 0.1rem;
     font-size: 8vmin;
-    border-radius: 0.3em;
+    border-radius: 0.25em;
     padding: 0.4rem;
+}
+.number-inner{
+    text-align: center;
+
+    width: 90%;
+    height: auto;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.25rem;
+
+    background: rgb(225, 226, 150); 
 }
 #zero{
     grid-area: 4 / 1 / span 1 / span 2;
+    
 }
 #functions{
     display: grid;
@@ -154,7 +200,7 @@
 }
 #functions button{
     
-    font-family: press_start_2pregular;
+    font-family: 'Roboto', sans-serif;
     font-size: 5vmin;
     border-radius: 0.4em;
     margin: 0.08rem;

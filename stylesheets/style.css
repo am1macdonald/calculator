@@ -98,7 +98,6 @@
     border-color: rgba(53, 53, 53, 0.377);
     border-width: 0.1rem;
     border-style: solid;
-
     filter: blur(0.01rem);
 }
 
@@ -145,7 +144,6 @@
 }
 #numbers button{
     text-align: center;
-
     background-color: rgb(251,255,15);
 
 

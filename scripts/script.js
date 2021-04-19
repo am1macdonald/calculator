@@ -68,7 +68,7 @@ modifyButtons.forEach(button => {
                 numberButtons.forEach(button => button.disabled = true);
                 let rooted = Math.sqrt(workingNumber());
                 numberArray = rooted.toString().split('');
-                display.innerText = rooted.toString();
+                updateDisplay(rooted);
                 break;
             case 'equals':
                 equals();
@@ -96,7 +96,7 @@ function clearArray() {
 };
 function updateDisplay(num) {
     
-    if(num >= Math.pow(10, 99)){
+    if(num >= Math.pow(10, 99) || num <= Math.pow(10, -99)){
         display.innerText = "ERROR";
     }
     else if(num.toString().length >= 10) {

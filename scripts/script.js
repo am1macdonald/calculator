@@ -62,7 +62,7 @@ modifyButtons.forEach(button => {
                 numberButtons.forEach(button => button.disabled = true);
                 let squared = workingNumber() * workingNumber();
                 numberArray = squared.toString().split('');
-                display.innerText = squared.toString();
+                updateDisplay(squared);
                 break;
             case 'square-root':
                 numberButtons.forEach(button => button.disabled = true);
@@ -95,14 +95,15 @@ function clearArray() {
     display.innerText = 0;
 };
 function updateDisplay(num) {
-
-    display.innerText = +num.toFixed(4);
-    if(num.length <= 10) {
-        display.innerText = num;
-    } else {
-        let digits = /\d+\./
-        let exponential = num.length;
-        let i = 0;
+    
+    if(num >= Math.pow(10, 99)){
+        display.innerText = "ERROR";
+    }
+    else if(num.toString().length >= 10) {
+        display.innerText = num.toExponential(4); 
+    } 
+    else {
+        display.innerText = +num.toFixed(4);
     };
 };
 function addEmUp(a, b) {

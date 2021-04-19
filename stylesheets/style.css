@@ -123,10 +123,9 @@
     letter-spacing: 0.05em;
     text-align: right;
     color: #fd84dbd3;
-    font-size: 15vmin;
+    font-size: 13vmin;
     font-family: 'lcd_att_phone_timedateregular';
     overflow: hidden;
-    text-overflow: ellipsis;
     justify-self: center;
 
 }

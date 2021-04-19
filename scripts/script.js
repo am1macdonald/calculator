@@ -96,7 +96,7 @@ function clearArray() {
 };
 function updateDisplay(num) {
 
-    display.innerText = num;
+    display.innerText = +num.toFixed(4);
     if(num.length <= 10) {
         display.innerText = num;
     } else {

@@ -80,13 +80,17 @@ modifyButtons.forEach(button => {
 function equals(){
     if (storageArray.length === 0 & workingNumber() != 'undefined'){
         storageArray.push(workingNumber());
+        numberButtons.forEach(button => button.disabled = true);
         clearArray();
         updateDisplay(storageArray[0]);        
     } else if (storageArray.length === 2){
         storageArray.push(workingNumber());
         clearArray();
         operate(storageArray[0], storageArray[2], storageArray[1]);
-    } else updateDisplay(0);
+    } else {
+        display.innerText = 'ERROR';
+        numberButtons.forEach(button => button.disabled = true);
+    };
 };
 function clearArray() {
     numberButtons.forEach(button => button.disabled = false);

@@ -139,7 +139,7 @@ html{
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: 3fr 2fr;
-    max-width: 95%;
+    min-width: 95%;
     justify-self: center;
 }
 #numbers{

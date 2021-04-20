@@ -93,10 +93,8 @@ html{
     overflow: hidden;
     box-shadow: inset -0.05rem -0.05rem .2rem .008rem rgba(0,0,0,1);
     flex-shrink: 2;
-    width: 8rem;
-    height: 2.5rem;
-    max-height: 50%;
-    max-width: 30%;
+    width: 10rem;
+    height: 3rem;
     border: 2px inset black;
 }
 .solar-panel{
@@ -137,21 +135,21 @@ html{
 }
 #buttons{
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     grid-template-columns: 3fr 2fr;
     max-width: 95%;
     justify-self: center;
 }
 #numbers{
     display: grid;
-    grid-gap: .2rem;
+    grid-gap: .3rem;
     grid-template-columns: 1fr 1fr 1fr;
     margin-right: 0.1rem;
 }
 #numbers button{
     text-align: center;
     background-color: hsl(199, 100%, 92%);
-    background: radial-gradient(circle, hsl(199, 100%, 92%) 5%, rgba(69,193,227,1) 63%, rgba(132,227,255,1) 100%); 
+    background: radial-gradient(circle, hsl(167, 34%, 76%) 5%, rgb(80, 223, 99) 63%, rgb(157, 255, 132) 100%); 
 
 
     border-color: hsl(199, 100%, 92%);;
@@ -170,7 +168,7 @@ html{
 }
 #functions{
     display: grid;
-    grid-gap: 0.1rem;
+    grid-gap: 0.2rem;
     grid-template-columns: 1fr 1fr;
 }
 #functions button{
@@ -190,4 +188,5 @@ html{
 #equals{
     grid-area: 5 / 1 / span 1 / span 2;
     font-size: 50px ;
+    background: rgb(25,134,164);
 }

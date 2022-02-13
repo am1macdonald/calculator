@@ -29,25 +29,30 @@
 --dark-cornflower-blue: hsla(215, 73%, 28%, 1);
 */
 
-/* CSS */
-html{
+/* Style */
+
+html {
     font-size: 1rem;
 }
-#background{
-    background-color: rgb(248, 231, 231);
-    background-size: cover;
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     position: fixed;
     width: 100%;
-    height: 100%;
+    height: 100%;   
+    
+    background-color: rgb(248, 231, 231);
+    background-size: cover;
 }
-#calculator-body{
-    padding: 1rem;
+
+#calculator-body {
+    box-sizing: border-box;
+    padding: 1vh 1vw;
     background: rgb(175, 175, 175);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 98%;
+    max-width: 98vw;
     max-height: 100vh;
     border-radius: 1rem;
     box-shadow: -.4rem -1.2rem 1.8em .3rem  rgba(132, 133, 132, 0.493),
@@ -58,25 +63,31 @@ html{
     justify-content: center;
     align-items: center;
 }
-#calculator-top{
+
+#calculator-top {
+    box-sizing: border-box;
     box-shadow: inset -0.05rem -0.05rem .2rem .008rem rgba(0,0,0,1);
     max-width: 88vmin;
     height: auto;    
-    padding: 3vmin;
+    padding: 1rem 3vw;
     border-radius: 0.4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
     background: rgb(242,70,70);
     background: linear-gradient(90deg, rgba(242,70,70,1) 0%, rgba(198,84,113,1) 48%, rgba(70,70,242,1) 100%); 
 }
-#logo{
+
+#logo {
     color: #0CCA18;
-    font-size: 4vmin;
+    font-size: 1.5rem;
     font-family: press_start_2pregular;
-    margin-right: 2vmin;
-   }
-#solar{
+    line-height: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    align-self: center;
+}
+
+#solar {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     border-radius: 0.6rem;
@@ -87,14 +98,16 @@ html{
     height: 6vmin;
     border: 2px inset black;
 }
-.solar-panel{
+
+.solar-panel {
     background-color: rgb(36, 35, 35);
     border-color: rgba(53, 53, 53, 0.377);
     border-width: 0.5vmin;
     border-style: solid;
     filter: blur(0.01rem);
 }
-#display-frame{
+
+#display-frame {
     margin-top: .2rem;
     z-index: 2;    
     background: rgb(255,255,255);
@@ -109,12 +122,13 @@ html{
     max-height: 70%;
     box-shadow: -0.1rem -0.05rem .1rem .008rem rgba(0,0,0,1);
 }
-#display{
+
+#display {
     z-index: 1;
     width: auto;
     height: 100%;
     background-color: black;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.05rem;
     text-align: right;
     color: #fd84dbd3;
     font-size: 15vmin;
@@ -122,20 +136,23 @@ html{
     overflow: hidden;
     justify-self: center;
 }
-#buttons{
+
+#buttons {
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: 3fr 2fr;
     min-width: 95%;
     justify-self: center;
 }
-#numbers{
+#numbers {
     display: grid;
     grid-gap: .3rem;
     grid-template-columns: 1fr 1fr 1fr;
     margin-right: 0.1rem;
 }
-#numbers button{
+
+#numbers button
+{
     text-align: center;
     background-color: #ffd803;    
     border-color: #ffd803;
@@ -144,18 +161,21 @@ html{
     font-family: 'Roboto', sans-serif;
     margin: 0.1rem;
     font-size: 8vmin;
-    border-radius: 0.25em;
+    border-radius: 0.25rem;
     padding: 0.4rem;
 }
-#zero{
+
+#zero {
     grid-area: 4 / 1 / span 1 / span 2;    
 }
-#functions{
+
+#functions {
     display: grid;
     grid-gap: 0.2rem;
     grid-template-columns: 1fr 1fr;
 }
-#functions button{    
+
+#functions button {    
     font-family: 'Roboto', sans-serif;
     font-size: 5vmin;
     border-radius: 0.4em;
@@ -163,9 +183,45 @@ html{
     box-shadow: -.25rem -0.8rem 1.8em .15rem  rgba(132, 133, 132, 0.493),
     0rem 0rem .15rem .15rem  rgb(0, 0, 0);
     background-color: #e3f6f5;
- }
-#equals{
+}
+
+#equals {
     grid-area: 5 / 1 / span 1 / span 2;
     font-size: 50px ;
     background: rgb(25,134,164);
+}
+
+@media screen and (max-width: 400px) {
+     #calculator-body {
+        max-width: 100vw;
+        width: 100vw;
+        max-height: 100vh;
+        height: 100vh;
+        border-radius: 0;
+    }
+    #calculator-top {
+        max-width: 100vw;
+        width: auto;
+    }
+    #buttons {
+        grid-template: 2fr 3fr 1fr / auto;
+        grid-gap: 2vh;
+    }
+    #numbers {
+        display: grid;
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    #functions {
+        grid-template: 1fr 1fr / repeat(4, 1fr);
+    }
+    #equals {
+        grid-area: 3 / 1 / 4 / 2;    
+        font-family: 'Roboto', sans-serif;
+        font-size: 15vmin;
+        border-radius: 0.4rem;
+        box-shadow: -.25rem -0.8rem 1.8em .15rem  rgba(132, 133, 132, 0.493),
+        0rem 0rem .15rem .15rem  rgb(0, 0, 0);
+        background-color: #e3f6f5;
+    }
+    
 }

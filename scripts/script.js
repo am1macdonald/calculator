@@ -1,7 +1,7 @@
 let numberArray = [];
 let storageArray= [];
 let display = document.getElementById('display');
-function workingNumber(){
+const workingNumber = () => {
     return parseFloat(numberArray.join(''));
 };
 let accumulator = 0;
@@ -111,7 +111,7 @@ function updateDisplay(num) {
     };
 };
 function addEmUp(a, b) {
-    console.log("addemup: ", a+b)
+    console.log("addemup: ", a + b)
     storageArray = [a + b];
     updateDisplay(storageArray[0]);
 };
@@ -127,7 +127,8 @@ function divideAndConquer(a, b) {
     storageArray = [a / b];
     updateDisplay(storageArray[0]);
 };
-function operate(a ,b, operator) {
+function operate(a, b, operator) {
+    console.log(storageArray);
     switch (operator) {
         case 'multiply':
             multiplyEm(a, b);
@@ -143,3 +144,26 @@ function operate(a ,b, operator) {
         break;
     };
 };
+
+const windowWidth = window.innerWidth;
+const mediaQuery = window.matchMedia("(max-width: 400px)");
+const functionButtons = document.getElementById('functions');
+const buttons = document.getElementById('buttons');
+const equalsButton = document.getElementById('equals'); 
+
+function moveEquals() {
+    if (mediaQuery.matches) {
+        equalsButton.remove();
+        buttons.append(equalsButton);
+
+    } else {
+        equalsButton.remove();
+        functionButtons.append(equalsButton);
+    }
+}
+
+mediaQuery.addEventListener("change", () => {
+    moveEquals();
+})
+
+moveEquals();

@@ -5,7 +5,10 @@ const workingNumber = () => {
     return parseFloat(numberArray.join(''));
 };
 let accumulator = 0;
-let numberButtons = document.querySelectorAll(".number");
+
+const numberButtons = document.querySelectorAll(".number");
+const functionButtons = document.querySelectorAll(".function");
+
 numberButtons.forEach(button => {
     button.addEventListener('click', (event) => {
         if (numberArray.length < 10) {
@@ -19,7 +22,7 @@ numberButtons.forEach(button => {
                 };
             } else if (button.name === '0' && numberArray.length === 0){
                 return;
-            } else if (typeof parseInt(button.name) === 'number') {
+            } else {
                 numberArray.push(button.name);
             };
             updateDisplay(workingNumber());
@@ -27,9 +30,8 @@ numberButtons.forEach(button => {
         } else return;
     });
 });
-let operationButtons = document.querySelectorAll(".function");
 
-operationButtons.forEach(operation => {
+functionButtons.forEach(operation => {
     operation.addEventListener('click', (event) => {
         numberButtons.forEach(button => button.disabled = false);
         if (numberArray.length > 0) {
@@ -146,8 +148,8 @@ function operate(a, b, operator) {
 };
 
 const windowWidth = window.innerWidth;
-const mediaQuery = window.matchMedia("(max-width: 400px)");
-const functionButtons = document.getElementById('functions');
+const mediaQuery = window.matchMedia("(max-width: 425px)");
+const functionButtonDiv = document.getElementById('functions');
 const buttons = document.getElementById('buttons');
 const equalsButton = document.getElementById('equals'); 
 
@@ -158,7 +160,7 @@ function moveEquals() {
 
     } else {
         equalsButton.remove();
-        functionButtons.append(equalsButton);
+        functionButtonDiv.append(equalsButton);
     }
 }
 

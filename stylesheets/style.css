@@ -41,7 +41,8 @@ main {
     align-items: center;
     
     width: 100vw;
-    height: 100vh;   
+    height: 100vh;
+    min-width: 257px;
     
     background-color: rgb(248, 231, 231);
     background-size: cover;
@@ -56,7 +57,7 @@ button {
 }
 
 #calculator-body {
-    padding: 4vh 3vw;
+    padding: min(4vh, 30px) min(3vw, 25px);
     background: rgb(175, 175, 175);
     max-width: 500px;
     max-height: 100vh;
@@ -74,11 +75,12 @@ button {
 #calculator-top {
     
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 4fr 2fr;
+    grid-gap: 1;
     
     height: auto;
     width: 100%;
-    padding: 3vh 3vw;
+    padding: 3vh 1vw;
     
     box-shadow: inset -0.05rem -0.05rem .2rem .008rem rgba(0,0,0,1);
     border-radius: 0.4rem;
@@ -103,8 +105,8 @@ button {
     overflow: hidden;
     box-shadow: inset -0.05rem -0.05rem .2rem .008rem rgba(0,0,0,1);
     flex-shrink: 2;
-    width: 25vmin;
-    height: 6vmin;
+    width: 100%;
+    height: 2rem;
     border: 2px inset black;
 }
 
@@ -131,9 +133,8 @@ button {
 }
 
 #display {
-    box-sizing: border-box;
     position: relative;
-    z-index: -0;
+    z-index: -1;
     width: 100%;
     padding: 1%;
     height: 4.5rem;
@@ -146,6 +147,7 @@ button {
     font-family: 'lcd_att_phone_timedateregular';
     overflow: hidden;
     align-self: center;
+    border-radius: inherit;
 }
 
 #buttons {
@@ -195,7 +197,7 @@ button {
     background: rgb(25,134,164);
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 440px) {
     
      #calculator-body {
         max-width: 100vw;
@@ -203,11 +205,6 @@ button {
         max-height: 100vh;
         height: auto;
         border-radius: 0;
-    }
-    
-    #calculator-top {
-        max-width: 100vw;
-        width: auto;
     }
     
     #buttons {
@@ -231,4 +228,9 @@ button {
         background-color: #e3f6f5;
     }
     
+}
+@media screen and (max-width: 295px) {
+    #solar {
+        display: none;
+    }
 }

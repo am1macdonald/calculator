@@ -156,7 +156,7 @@ function operate(a, b, operator) {
 }
 
 const windowWidth = window.innerWidth
-const mediaQuery = window.matchMedia("(max-width: 425px)")
+const mediaQuery = window.matchMedia("(max-width: 440px)")
 const functionButtonDiv = document.getElementById('functions')
 const buttons = document.getElementById('buttons')
 const equalsButton = document.getElementById('equals');

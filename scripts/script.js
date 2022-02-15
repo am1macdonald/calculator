@@ -28,7 +28,7 @@ numberButtons.forEach(button => {
                 numberArray.push(button.name)
             }
             updateDisplay(workingNumber())
-        console.log(button.name, numberArray)
+        console.log(button.name, "number Array: ", numberArray)
         } else return
     })
 })
@@ -95,6 +95,7 @@ function equals(){
         display.innerText = 'ERROR'
         numberButtons.forEach(button => button.disabled = true)
     }
+    console.log('storageArray: ', storageArray)
 }
 
 function clearArray() {

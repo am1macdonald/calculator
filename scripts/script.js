@@ -1,17 +1,19 @@
 const display = document.getElementById('display')
 const numberButtons = document.querySelectorAll(".number")
 const clearButton = document.getElementById('clear')
+const clearAllButton = document.getElementById('clear-all')
 const squareButton = document.getElementById('square')
+const rootButton = document.getElementById('square-root')
 
 
 const inputsManager = (() => {
 
     let inputArr = [];
-    let storageArray = [];
+    let storageArr = [];
 
     const inputNumber = () => { 
         return parseFloat(inputArr.join(''))
-     }
+    }
 
     const appendNumber = (str) => {
         if (inputArr.length < 10) {
@@ -38,35 +40,57 @@ const inputsManager = (() => {
         console.log('inputArr: ', inputArr)
     }
 
+    const clearStorage = () => {
+        storageArr = []
+        console.log('storageArr: ', storageArr)
+    }
     const storeNum = () => {
         if (inputNumber() === NaN) {
             return NaN
-        } else if (storageArray.length === 0 || storageArray.length === 2) {
-            storageArray.push(inputNumber());
+        } else if (storageArr.length === 0 || storageArr.length === 2) {
+            storageArr.push(inputNumber());
             clearInput()
-            console.log('storage array: ', storageArray)
+            console.log('storage array: ', storageArr)
         }
     }
 
+    const getWorkingNumber = () => {
+        if (inputArr.length > 0) {
+            return inputNumber()
+        } else if (storageArr.length === 1 || storageArr.length === 3) {
+            return storageArr.pop()
+        }
+    }
+
+    const setWorkingNumber = (num) => {
+        inputArr = String(num).split('')
+        console.log(inputArr)
+    }
+
+    const replaceStored = () => {
+
+    }
+
     return {
-        inputNumber,
         appendNumber,
         clearInput,
-        storeNum
+        clearStorage,
+        storeNum,
+        getWorkingNumber,
+        setWorkingNumber,
+        storageArr
     }
 
 })()
 
 const stateManager = (() => {
 
-    const disableNumbers = () => {
+    const disableNumbers = (state) => {
         numberButtons.forEach(button => {
-            let state = button.disabled
-            console.log(state)
             if (state) {
-                button.disabled = false
-            } else {
                 button.disabled = true
+            } else if (!state) {
+                button.disabled = false
             }
         })
     } 
@@ -74,9 +98,47 @@ const stateManager = (() => {
     return {
         disableNumbers
     }
+
+})()
+
+const mathFunctions = (() => {
+
+    const squareIt = (num) => {
+        return num * num
+    }
+
+    const rootIt = (num) => {
+        return Math.sqrt(num)
+    }
+
+    const addIt = (a, b) => {
+        return a + b
+    }
+
+    const subtractIt = (a, b) => {
+        return a - b
+    }
+
+    const multiplyIt = (a, b) => {
+        return a * b
+    }
+
+    const divideIt = (a, b) => {
+        return a / b
+    }
+    return {
+        squareIt,
+        rootIt,
+        addIt,
+        subtractIt,
+        multiplyIt,
+        divideIt
+    }
+
 })()
 
 const listeners = (() => {
+
     numberButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             console.log(button.name)
@@ -86,14 +148,29 @@ const listeners = (() => {
 
     clearButton.addEventListener('click', () => {
         inputsManager.clearInput()
+        stateManager.disableNumbers(false)
     })
 
-
+    clearAllButton.addEventListener('click', () => {
+        inputsManager.clearInput()
+        inputsManager.clearStorage()
+        stateManager.disableNumbers(false)
+    })
 
     squareButton.addEventListener('click', () => {
-
+        stateManager.disableNumbers(true)
+        let num = mathFunctions.squareIt(inputsManager.getWorkingNumber())
+        inputsManager.setWorkingNumber(num)
     })
+
+    rootButton.addEventListener('click', () => {
+        stateManager.disableNumbers(true)
+        let num = mathFunctions.rootIt(inputsManager.getWorkingNumber())
+        inputsManager.setWorkingNumber(num)
+    })
+
 })()
+
 
 
 

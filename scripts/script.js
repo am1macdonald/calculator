@@ -76,23 +76,24 @@ const stateManager = (() => {
     }
 })()
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        console.log(button.name)
-        inputsManager.appendNumber(button.name)
+const listeners = (() => {
+    numberButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            console.log(button.name)
+            inputsManager.appendNumber(button.name)
+        })
     })
-})
 
-clearButton.addEventListener('click', () => {
-    inputsManager.clearInput()
-})
-
+    clearButton.addEventListener('click', () => {
+        inputsManager.clearInput()
+    })
 
 
-squareButton.addEventListener('click', () => {
 
-})
+    squareButton.addEventListener('click', () => {
 
+    })
+})()
 
 
 

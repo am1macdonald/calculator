@@ -42,7 +42,7 @@ main {
     
     width: 100vw;
     height: 100vh;
-    min-width: 257px;
+    min-width: 314px;
     
     background-color: rgb(248, 231, 231);
     background-size: cover;
@@ -226,11 +226,5 @@ button {
         font-size: 15vmin;
         border-radius: 0.4rem;        
         background-color: #e3f6f5;
-    }
-    
-}
-@media screen and (max-width: 295px) {
-    #solar {
-        display: none;
-    }
+    }  
 }

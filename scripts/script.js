@@ -6,10 +6,11 @@ const squareButton = document.getElementById('square')
 const rootButton = document.getElementById('square-root')
 const multiplyButton = document.getElementById('multiply')
 const divideButton = document.getElementById('divide')
-const addButton = document.getElementById('add')
-const subtractButton = document.getElementById('subtract')
+const addButton = document.getElementById('plus')
+const subtractButton = document.getElementById('minus')
+const equalsButton = document.getElementById('equals')
 
-const inputsManager = (() => {
+const numberManager = (() => {
 
     let inputArr = []
     let storageArr = []
@@ -103,16 +104,21 @@ const inputsManager = (() => {
     }
 
     // make sure to store the number!!!
-    const handleOperator = (operation) => {
+    const handleOperation = (operation) => {
+        console.log(operation)
+        
+    }
 
-        if (temp === undefined) {
-            temp = curryFunc(operation)(storageArr[0])
-            storageArr = []
-        } else {
-            storageArr = [temp(storageArr[0])]
-            temp = undefined
+    const handleFunction = (func) => {
+        let num = getWorkingNumber()
+        if (typeof num === 'number') {
+            setWorkingNumber(func(num))
         }
-        console.log(temp, storageArr)
+        console.log(func)
+    }
+
+    const equals = () => {
+
     }
 
 
@@ -125,7 +131,9 @@ const inputsManager = (() => {
         storeNum,
         getWorkingNumber,
         setWorkingNumber,
-        handleOperator
+        handleOperation,
+        handleFunction,
+        equals
     }
 
 })()
@@ -189,52 +197,56 @@ const listeners = (() => {
     numberButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             console.log(button.name)
-            inputsManager.appendToInputArr(button.name)
+            numberManager.appendToInputArr(button.name)
         })
     })
 
     clearButton.addEventListener('click', () => {
-        inputsManager.clearInput()
+        numberManager.clearInput()
         stateManager.disableNumbers(false)
     })
 
     clearAllButton.addEventListener('click', () => {
-        inputsManager.clearInput()
-        inputsManager.clearStorage()
-        inputsManager.clearFunction()
+        numberManager.clearInput()
+        numberManager.clearStorage()
+        numberManager.clearFunction()
         stateManager.disableNumbers(false)
     })
 
     squareButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        inputsManager.handleOperator(mathFunctions.squareIt)
+        numberManager.handleFunction(mathFunctions.squareIt)
     })
 
     rootButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        inputsManager.handleOperator(mathFunctions.rootIt)
+        numberManager.handleFunction(mathFunctions.rootIt)
     })
 
     multiplyButton.addEventListener('click', () => {
         stateManager.disableNumbers(false)
-        inputsManager.handleOperator(mathFunctions.multiplyIt)
+        numberManager.handleOperation(mathFunctions.multiplyIt)
     })
 
     divideButton.addEventListener('click', () => {
         stateManager.disableNumbers(false)
-        inputsManager.handleOperator(mathFunctions.divideIt)
+        numberManager.handleOperation(mathFunctions.divideIt)
     })
 
     addButton.addEventListener('click', () => {
         stateManager.disableNumbers(false)
-        inputsManager.handleOperator(mathFunctions.addIt)
+        numberManager.handleOperation(mathFunctions.addIt)
     })
 
     subtractButton.addEventListener('click', () => {
         stateManager.disableNumbers(false)
-        inputsManager.handleOperator(mathFunctions.subtractIt)
+        numberManager.handleOperation(mathFunctions.subtractIt)
     })
 
+    equalsButton.addEventListener('click', () => {
+        stateManager.disableNumbers(true)
+        numberManager.equals
+    })
 })()
 
 
@@ -249,7 +261,6 @@ const windowWidth = window.innerWidth
 const mediaQuery = window.matchMedia("(max-width: 440px)")
 const functionButtonDiv = document.getElementById('functions')
 const buttons = document.getElementById('buttons')
-const equalsButton = document.getElementById('equals');
 
 function moveEquals() {
     if (mediaQuery.matches) {

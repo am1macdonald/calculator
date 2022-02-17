@@ -4,18 +4,28 @@ const clearButton = document.getElementById('clear')
 const clearAllButton = document.getElementById('clear-all')
 const squareButton = document.getElementById('square')
 const rootButton = document.getElementById('square-root')
-
+const multiplyButton = document.getElementById('multiply')
+const divideButton = document.getElementById('divide')
+const addButton = document.getElementById('add')
+const subtractButton = document.getElementById('subtract')
 
 const inputsManager = (() => {
 
-    let inputArr = [];
-    let storageArr = [];
+    let inputArr = []
+    let storageArr = []
+    let temp = undefined
 
-    const inputNumber = () => { 
-        return parseFloat(inputArr.join(''))
+    // returns a number from the input array
+    const numFromInput = () => { 
+        if (inputArr.length > 0) {
+            return parseFloat(inputArr.join(''))
+        } else {
+            return 0
+        }
     }
 
-    const appendNumber = (str) => {
+    // controls how digits and characters are added to the input
+    const appendToInputArr = (str) => {
         if (inputArr.length < 10) {
             if (str === '.') {
                 if (inputArr.includes('.')) {
@@ -35,50 +45,87 @@ const inputsManager = (() => {
         console.log('inputArr: ', inputArr)
     }
 
+    // clears the input array
     const clearInput = () => {
         inputArr = []
         console.log('inputArr: ', inputArr)
     }
 
+    // clears the storage array
     const clearStorage = () => {
         storageArr = []
         console.log('storageArr: ', storageArr)
     }
+
+    const clearFunction = () => {
+        curriedFunc = undefined
+        console.log('curriedFunc: ', curriedFunc)
+    }
+
+    // stores the number input
     const storeNum = () => {
-        if (inputNumber() === NaN) {
+        if (numFromInput() === NaN) {
             return NaN
         } else if (storageArr.length === 0 || storageArr.length === 2) {
-            storageArr.push(inputNumber());
+            storageArr.push(numFromInput());
             clearInput()
-            console.log('storage array: ', storageArr)
+            console.log('storageArr: ', storageArr)
         }
     }
 
+    // gets the most recent number input
     const getWorkingNumber = () => {
         if (inputArr.length > 0) {
-            return inputNumber()
+            return numFromInput()
         } else if (storageArr.length === 1 || storageArr.length === 3) {
             return storageArr.pop()
         }
     }
 
+    // sets the given number up for editing in inputArr
     const setWorkingNumber = (num) => {
         inputArr = String(num).split('')
         console.log(inputArr)
     }
 
-    const replaceStored = () => {
-
+    const replaceStored = (num) => {
+        storageArr[0] = num
     }
 
+
+    // sets the operator and a var up for currying
+    const curryFunc = (operation) => {
+        return function (a) {
+            return function (b) {
+                return operation(a, b)
+            }
+        }
+    }
+
+    // make sure to store the number!!!
+    const handleOperator = (operation) => {
+
+        if (temp === undefined) {
+            temp = curryFunc(operation)(storageArr[0])
+            storageArr = []
+        } else {
+            storageArr = [temp(storageArr[0])]
+            temp = undefined
+        }
+        console.log(temp, storageArr)
+    }
+
+
+
     return {
-        appendNumber,
+        appendToInputArr,
         clearInput,
         clearStorage,
+        clearFunction,
         storeNum,
         getWorkingNumber,
         setWorkingNumber,
-        storageArr
+        handleOperator
     }
 
 })()
@@ -142,7 +189,7 @@ const listeners = (() => {
     numberButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             console.log(button.name)
-            inputsManager.appendNumber(button.name)
+            inputsManager.appendToInputArr(button.name)
         })
     })
 
@@ -154,19 +201,38 @@ const listeners = (() => {
     clearAllButton.addEventListener('click', () => {
         inputsManager.clearInput()
         inputsManager.clearStorage()
+        inputsManager.clearFunction()
         stateManager.disableNumbers(false)
     })
 
     squareButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        let num = mathFunctions.squareIt(inputsManager.getWorkingNumber())
-        inputsManager.setWorkingNumber(num)
+        inputsManager.handleOperator(mathFunctions.squareIt)
     })
 
     rootButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        let num = mathFunctions.rootIt(inputsManager.getWorkingNumber())
-        inputsManager.setWorkingNumber(num)
+        inputsManager.handleOperator(mathFunctions.rootIt)
+    })
+
+    multiplyButton.addEventListener('click', () => {
+        stateManager.disableNumbers(false)
+        inputsManager.handleOperator(mathFunctions.multiplyIt)
+    })
+
+    divideButton.addEventListener('click', () => {
+        stateManager.disableNumbers(false)
+        inputsManager.handleOperator(mathFunctions.divideIt)
+    })
+
+    addButton.addEventListener('click', () => {
+        stateManager.disableNumbers(false)
+        inputsManager.handleOperator(mathFunctions.addIt)
+    })
+
+    subtractButton.addEventListener('click', () => {
+        stateManager.disableNumbers(false)
+        inputsManager.handleOperator(mathFunctions.subtractIt)
     })
 
 })()

@@ -260,7 +260,7 @@ const displayManager = (() => {
             display.innerHTML = '0'
             return
         }
-        if (num >= Math.pow(10, 99) || num <= Math.pow(10, -99)) {
+        if (num >= Math.pow(10, 99) || num <= Math.pow(-10,  99)) {
             display.innerHTML = "ERROR"
         }
         else if (String(num).length >= 10) {

@@ -58,27 +58,18 @@ const numberManager = (() => {
         console.log('storageArr: ', storageArr)
     }
 
-    const clearFunction = () => {
-        curriedFunc = undefined
-        console.log('curriedFunc: ', curriedFunc)
-    }
-
-    // stores the number input
-    const storeNum = () => {
-        if (numFromInput() === NaN) {
-            return NaN
-        } else if (storageArr.length === 0 || storageArr.length === 2) {
-            storageArr.push(numFromInput());
-            clearInput()
-            console.log('storageArr: ', storageArr)
-        }
+    // clears the partial function storage
+    const clearTemp = () => {
+        temp = undefined
+        console.log('temp: ', temp)
     }
 
     // gets the most recent number input
     const getWorkingNumber = () => {
         if (inputArr.length > 0) {
             return numFromInput()
-        } else if (storageArr.length === 1 || storageArr.length === 3) {
+        } 
+        else if (storageArr.length > 0) {
             return storageArr.pop()
         }
     }
@@ -86,13 +77,8 @@ const numberManager = (() => {
     // sets the given number up for editing in inputArr
     const setWorkingNumber = (num) => {
         inputArr = String(num).split('')
-        console.log(inputArr)
+        console.log('inputArr: ', inputArr)
     }
-
-    const replaceStored = (num) => {
-        storageArr[0] = num
-    }
-
 
     // sets the operator and a var up for currying
     const curryFunc = (operation) => {
@@ -105,11 +91,22 @@ const numberManager = (() => {
 
     // make sure to store the number!!!
     const handleOperation = (operation) => {
-        console.log(operation)
-        
+        let num = getWorkingNumber()
+        if (typeof num === 'number') {
+            if (temp == undefined) {
+                temp = curryFunc(operation)(num)
+                console.log(temp)
+                clearInput()
+            } else {
+                setWorkingNumber(temp(num))
+                clearTemp()
+                console.log(temp)
+                handleOperation(operation)
+            }
+        }
     }
 
-    const handleFunction = (func) => {
+    const handleSquares = (func) => {
         let num = getWorkingNumber()
         if (typeof num === 'number') {
             setWorkingNumber(func(num))
@@ -118,28 +115,35 @@ const numberManager = (() => {
     }
 
     const equals = () => {
-
+        if (temp !== undefined) {
+            setWorkingNumber(temp(getWorkingNumber()))
+            clearTemp()
+        }
+        showArrays()
     }
 
-
+    const showArrays = () => {
+        console.log('storageArr: ', storageArr)
+        console.log('inputArr: ', inputArr)
+        console.log('temp: ', temp)
+    }
 
     return {
         appendToInputArr,
         clearInput,
         clearStorage,
-        clearFunction,
-        storeNum,
+        clearTemp,
         getWorkingNumber,
         setWorkingNumber,
         handleOperation,
-        handleFunction,
-        equals
+        handleSquares,
+        equals,
+        showArrays
     }
 
 })()
 
 const stateManager = (() => {
-
     const disableNumbers = (state) => {
         numberButtons.forEach(button => {
             if (state) {
@@ -153,7 +157,6 @@ const stateManager = (() => {
     return {
         disableNumbers
     }
-
 })()
 
 const mathFunctions = (() => {
@@ -209,18 +212,18 @@ const listeners = (() => {
     clearAllButton.addEventListener('click', () => {
         numberManager.clearInput()
         numberManager.clearStorage()
-        numberManager.clearFunction()
+        numberManager.clearTemp()
         stateManager.disableNumbers(false)
     })
 
     squareButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        numberManager.handleFunction(mathFunctions.squareIt)
+        numberManager.handleSquares(mathFunctions.squareIt)
     })
 
     rootButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        numberManager.handleFunction(mathFunctions.rootIt)
+        numberManager.handleSquares(mathFunctions.rootIt)
     })
 
     multiplyButton.addEventListener('click', () => {
@@ -245,17 +248,13 @@ const listeners = (() => {
 
     equalsButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
-        numberManager.equals
+        numberManager.equals()
     })
 })()
 
+const displayManager = () => {
 
-
-
-
-
-
-
+}
 
 const windowWidth = window.innerWidth
 const mediaQuery = window.matchMedia("(max-width: 440px)")

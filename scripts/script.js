@@ -42,26 +42,21 @@ const numberManager = (() => {
                 inputArr.push(str)
             }
         } else return
-
-        console.log('inputArr: ', inputArr)
     }
 
     // clears the input array
     const clearInput = () => {
         inputArr = []
-        console.log('inputArr: ', inputArr)
     }
 
     // clears the storage array
     const clearStorage = () => {
         storageArr = []
-        console.log('storageArr: ', storageArr)
     }
 
     // clears the partial function storage
     const clearTemp = () => {
         temp = undefined
-        console.log('temp: ', temp)
     }
 
     // gets the most recent number input
@@ -77,7 +72,6 @@ const numberManager = (() => {
     // sets the given number up for editing in inputArr
     const setWorkingNumber = (num) => {
         inputArr = String(num).split('')
-        console.log('inputArr: ', inputArr)
     }
 
     // sets the operator and a var up for currying
@@ -95,12 +89,10 @@ const numberManager = (() => {
         if (typeof num === 'number') {
             if (temp == undefined) {
                 temp = curryFunc(operation)(num)
-                console.log(temp)
                 clearInput()
             } else {
                 setWorkingNumber(temp(num))
                 clearTemp()
-                console.log(temp)
                 handleOperation(operation)
             }
         }
@@ -111,7 +103,6 @@ const numberManager = (() => {
         if (typeof num === 'number') {
             setWorkingNumber(func(num))
         }
-        console.log(func)
     }
 
     const equals = () => {
@@ -120,6 +111,7 @@ const numberManager = (() => {
             clearTemp()
         }
         showArrays()
+        displayManager.update(numberManager.getWorkingNumber())
     }
 
     const showArrays = () => {
@@ -199,14 +191,16 @@ const listeners = (() => {
 
     numberButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            console.log(button.name)
             numberManager.appendToInputArr(button.name)
+            displayManager.update(numberManager.getWorkingNumber())
         })
     })
 
     clearButton.addEventListener('click', () => {
         numberManager.clearInput()
         stateManager.disableNumbers(false)
+
+        displayManager.update(numberManager.getWorkingNumber())
     })
 
     clearAllButton.addEventListener('click', () => {
@@ -214,16 +208,20 @@ const listeners = (() => {
         numberManager.clearStorage()
         numberManager.clearTemp()
         stateManager.disableNumbers(false)
+
+        displayManager.update(numberManager.getWorkingNumber())
     })
 
     squareButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
         numberManager.handleSquares(mathFunctions.squareIt)
+        displayManager.update(numberManager.getWorkingNumber())
     })
 
     rootButton.addEventListener('click', () => {
         stateManager.disableNumbers(true)
         numberManager.handleSquares(mathFunctions.rootIt)
+        displayManager.update(numberManager.getWorkingNumber())
     })
 
     multiplyButton.addEventListener('click', () => {
@@ -250,11 +248,38 @@ const listeners = (() => {
         stateManager.disableNumbers(true)
         numberManager.equals()
     })
+
 })()
 
-const displayManager = () => {
+const displayManager = (() => {
+    const display = document.getElementById('display')
+    let regex = /\.\d{4,}/g
+    
+    const update = (num) => {
+        if (!num) {
+            display.innerHTML = '0'
+            return
+        }
+        if (num >= Math.pow(10, 99) || num <= Math.pow(10, -99)) {
+            display.innerHTML = "ERROR"
+        }
+        else if (String(num).length >= 10) {
+            display.innerHTML = String(num.toExponential(4))
+             
+        }
+        else if (String(num).match(regex)) {
+            display.innerHTML = String(num.toFixed(4))
+        }
+        else {
+            display.innerHTML = String(num)
+        }
+    }
 
-}
+    return {
+        update,
+        clear
+    }
+})()
 
 const windowWidth = window.innerWidth
 const mediaQuery = window.matchMedia("(max-width: 440px)")
